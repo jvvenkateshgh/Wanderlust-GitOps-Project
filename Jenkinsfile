@@ -1,6 +1,6 @@
 @Library('Shared') _
 pipeline {
-    agent {label 'Node'}
+    agent {label ''}
     
     environment{
         SONAR_HOME = tool "Sonar"
@@ -32,7 +32,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/harshitsahu2311/Wanderlust-GitOps-Project.git","main")
+                    code_checkout("https://github.com/jvvenkateshgh/Wanderlust-GitOps-Project.git","main")
                 }
             }
         }
@@ -97,11 +97,11 @@ pipeline {
             steps{
                 script{
                         dir('backend'){
-                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","harshitsahu2311")
+                            docker_build("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","jvvenkateshdh")
                         }
                     
                         dir('frontend'){
-                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","harshitsahu2311")
+                            docker_build("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","jvvenkateshdh")
                         }
                 }
             }
@@ -110,8 +110,8 @@ pipeline {
         stage("Docker: Push to DockerHub"){
             steps{
                 script{
-                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","harshitsahu2311") 
-                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","harshitsahu2311")
+                    docker_push("wanderlust-backend-beta","${params.BACKEND_DOCKER_TAG}","jvvenkateshdh") 
+                    docker_push("wanderlust-frontend-beta","${params.FRONTEND_DOCKER_TAG}","jvvenkateshdh")
                 }
             }
         }
